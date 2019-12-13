@@ -7,7 +7,7 @@
       </div>
       <div class="table-rows">
         <div class="table-row" v-for="(r, index) in table.rows" :key="`r-${index}`" :style="`grid-template-columns: ${table.gridWidths}`">
-          <div class="table-column" v-for="(c, index2) in r" :key="`r-${index}c-${index2}`">{{c}}</div>
+          <div class="table-column" v-for="(c, index2) in table.columns" :key="`r-${index}c-${index2}`">{{r[index2]}}</div>
         </div>
       </div>
       <div class="count">
@@ -20,23 +20,23 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
-import { Table } from "../Table";
+import { Table, Delimiter } from "../Table";
 
 @Component
 export default class MyTable extends Vue {
   @Prop() private payload!: string;
 
-  table: Table = new Table();
+  table: Table = new Table(['c1', 'c2', 'c3']);
 
   created() {
-    this.table.fromCSV(this.payload, {hasTitle: true});
+    this.table.fromCSV(this.payload, {delimiter: Delimiter.tck, hasTitle: false});
   }
 
   SearchWord = "";
 
   @Watch("payload")
   f1() {
-    this.table.fromCSV(this.payload, {hasTitle: true});
+    this.table.fromCSV(this.payload, {delimiter: Delimiter.tck, hasTitle: false});
   }
 
   @Watch("SearchWord")

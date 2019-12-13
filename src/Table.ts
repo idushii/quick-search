@@ -16,7 +16,7 @@ class Table {
     search: string = ''
 
     constructor(columns?: string[], rows?: string[][]) {
-        if (rows) this._rows = rows;
+        if (rows) this.rows = rows;
         if (columns) this.columns = columns;
     }
 
@@ -26,7 +26,7 @@ class Table {
             return this._rows.filter(r => {
                 console.log(r.includes(s))
                 let flag = false;
-                for(let c of r) if (c.indexOf(s) == 0) flag = true;
+                for (let c of r) if (c.indexOf(s) == 0) flag = true;
                 return flag;
             });
 
@@ -34,7 +34,7 @@ class Table {
     }
 
     set rows(rows) {
-        this._rows = rows;
+        this._rows = rows.filter(r => r && r.length);
     }
 
     get columns() {
@@ -53,12 +53,13 @@ class Table {
     }
 
     newLine(line: string[] = []) {
-        this._rows.push(line);
+        if (line && line.length)
+            this._rows.push(line);
     }
 
     fromCSV(str: string, params?: { delimiter?: Delimiter.space, hasTitle?: boolean }) {
         if (!str) return;
-        let lines = str.split('\r\n');
+        let lines = str.split('\n');
         let d = Delimiter.space
 
         if (params) {
@@ -67,7 +68,7 @@ class Table {
 
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i]
-            let cols = line.split(d)
+            let cols = line.split(d).filter(r => r)
             if (i == 0 && params && params.hasTitle) {
                 this.columns = cols;
                 continue;
@@ -80,9 +81,19 @@ class Table {
         this.search = str;
     }
 
-    get gridWidths()  {
+    get avgWidth() {
+        let result: number[] = [];
+
+        for (let c in this._columns) {
+            //if (result[c]) result[c] += this._rows.reduce(r => )
+        }
+
+        return result;
+    }
+
+    get gridWidths() {
         return this._widths.map(e => `${e}fr`).join(' ')
     }
 }
 
-export { Table }
+export { Table, Delimiter }
