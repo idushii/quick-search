@@ -6,16 +6,16 @@
         <div class="table-column" v-for="(c, index) in table.columns" :key="`c-${index}`">{{c}}</div>
       </div>
       <div class="table-rows">
-        <template v-for="(r, index) in table.rows">
+        <template v-for="(r) in table.rows_reduce">
           <div
             class="table-row"
-            :key="`r-${index}`"
+            :key="`r-${r.id}`"
             :style="`grid-template-columns: ${table.gridWidths}`"
           >
             <div
               class="table-column"
               v-for="(c, index2) in table.columns"
-              :key="`r-${index}c-${index2}`"
+              :key="`c-${index2}-${r.id}`"
             >{{r[index2]}}</div>
           </div>
         </template>

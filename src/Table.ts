@@ -8,6 +8,7 @@ class Table {
     public _rows: string[][] = [];
     public _columns: string[] = [];
     public search: string = '';
+    public widths: number[] = [];
 
     constructor(columns?: string[], rows?: string[][]) {
         if (rows) { this.rows = rows; }
@@ -26,7 +27,13 @@ class Table {
             });
         }
 
-        return result.slice(0, 20)
+        return result;
+    }
+
+    get rows_reduce()  {
+        let result = this.rows.slice(0, 10000)
+        console.log('end calc')
+        return result
     }
 
     set rows(rows) {
@@ -46,6 +53,8 @@ class Table {
     public newLine(line: string[] = []) {
         console.log(this._rows.length);
         if (line && line.length) {
+            //@ts-ignore
+            line["id"] = this._rows.length
             this._rows.push(line);
         }
     }
@@ -68,31 +77,33 @@ class Table {
             }
             this.newLine(cols);
         }
+
+        this.caclAvgWidth();
     }
 
     public find(str: string) {
         this.search = str;
     }
 
-    get avgWidth() {
+    caclAvgWidth() {
         const result: number[] = [];
 
         for (let i = 0; i < this._columns.length; i++) {
             let sum = 0;
 
-            for (let j = 0; j < this.rows.length; j++) {
-                sum += this.rows[j][i].length;
+            for (let j = 0; j < this._rows.length; j++) {
+                sum += this._rows[j][i].length;
             }
 
             if (!result[i]) { result[i] = 0; }
             result[i] += sum;
         }
-
-        return result;
+        console.log('end calc width')
+        this.widths =  result;
     }
 
     get gridWidths() {
-        return this.avgWidth.map((e) => `${e}fr`).join(' ');
+        return this.widths.map((e) => `${e}fr`).join(' ');
     }
 }
 
