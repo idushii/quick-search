@@ -70,6 +70,7 @@ class Table {
             let cols = line.split(d)
             if (i == 0 && params && params.hasTitle) {
                 this.columns = cols;
+                continue;
             }
             this.newLine(cols);
         }
