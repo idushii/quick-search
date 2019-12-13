@@ -16,15 +16,17 @@ class Table {
 
     get rows() {
         const s = this.search;
+        let result = this._rows
+
         if (this.search) {
-            return this._rows.filter((r) => {
+            result = this._rows.filter((r) => {
                 let flag = false;
                 for (const c of r) { if (c.indexOf(s) == 0) { flag = true; } }
                 return flag;
             });
         }
 
-        return this._rows;
+        return result.slice(0, 20)
     }
 
     set rows(rows) {

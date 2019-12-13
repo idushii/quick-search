@@ -9,7 +9,6 @@
         <template v-for="(r, index) in table.rows">
           <div
             class="table-row"
-            v-if="index < 10"
             :key="`r-${index}`"
             :style="`grid-template-columns: ${table.gridWidths}`"
           >
