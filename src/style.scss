@@ -1,0 +1,33 @@
+@import "materialize-css/sass/materialize.scss";
+
+.wrap-table {
+    @extend .card;
+
+    box-sizing: border-box;
+
+    input {
+        font-size: 1.2rem !important;
+        padding: .5rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .table {
+        @extend .card-content;
+       .table-columns, .table-row {
+           display: grid;
+           grid-auto-flow: column;
+       }
+
+       .table-columns .table-column {
+           font-weight: bold;
+           font-size: 1.2rem;
+           text-align: center;
+       }
+
+       .table-column {
+           border: 1px dashed rgb(199, 198, 198);
+           border-collapse: collapse;
+           padding: .5rem;
+       }
+    }
+}
