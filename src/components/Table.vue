@@ -26,33 +26,33 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
-import { Table, Delimiter } from "../Table";
+import { Table, Delimiter } from '../Table';
 
 @Component
 export default class MyTable extends Vue {
-  public table: Table = new Table(["c1", "c2", "c3"]);
+  public table: Table = new Table(['c1', 'c2', 'c3']);
 
-  public SearchWord = "";
+  public SearchWord = '';
   @Prop() private payload!: string;
 
   public created() {
     this.table.fromCSV(this.payload, {
       delimiter: Delimiter.tck,
-      hasTitle: false
+      hasTitle: false,
     });
   }
 
-  @Watch("payload")
+  @Watch('payload')
   public f1() {
     this.table.fromCSV(this.payload, {
       delimiter: Delimiter.tck,
-      hasTitle: false
+      hasTitle: false,
     });
   }
 
-  @Watch("SearchWord")
+  @Watch('SearchWord')
   public f2() {
     this.table.find(this.SearchWord);
   }

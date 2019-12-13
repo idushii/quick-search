@@ -17,7 +17,7 @@ class Table {
 
     get rows() {
         const s = this.search;
-        let result = this._rows
+        let result = this._rows;
 
         if (this.search) {
             result = this._rows.filter((r) => {
@@ -31,9 +31,9 @@ class Table {
     }
 
     get rows_reduce()  {
-        let result = this.rows.slice(0, 10000)
-        console.log('end calc')
-        return result
+        const result = this.rows.slice(0, 10000);
+        console.log('end calc');
+        return result;
     }
 
     set rows(rows) {
@@ -53,8 +53,8 @@ class Table {
     public newLine(line: string[] = []) {
         console.log(this._rows.length);
         if (line && line.length) {
-            //@ts-ignore
-            line["id"] = this._rows.length
+            // @ts-ignore
+            line.id = this._rows.length;
             this._rows.push(line);
         }
     }
@@ -85,7 +85,7 @@ class Table {
         this.search = str;
     }
 
-    caclAvgWidth() {
+    public caclAvgWidth() {
         const result: number[] = [];
 
         for (let i = 0; i < this._columns.length; i++) {
@@ -98,7 +98,7 @@ class Table {
             if (!result[i]) { result[i] = 0; }
             result[i] += sum;
         }
-        console.log('end calc width')
+        console.log('end calc width');
         this.widths =  result;
     }
 
