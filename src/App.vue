@@ -7,19 +7,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Table from "./components/Table.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Table from './components/Table.vue';
 
 @Component({
   components: {
-    Table
-  }
+    Table,
+  },
 })
 export default class App extends Vue {
-  payload = "";
+  public payload = '';
 
-  async mounted() {
-    this.payload = await fetch("./payload.csv").then(r => r.text());
+  public async mounted() {
+    this.payload = await fetch('./payload.csv').then((r) => r.text());
   }
 }
 </script>
