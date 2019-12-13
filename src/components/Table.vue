@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-table">
-    <input type="text" v-model="SearchWord" placeholder="Начните вводить текст" />
+    <input type="text" v-model="SearchWord" placeholder="Начните вводить текст" autofocus />
     <div class="table">
       <div class="table-columns" :style="`grid-template-columns: ${table.gridWidths}`">
         <div class="table-column" v-for="(c, index) in table.columns" :key="`c-${index}`">{{c}}</div>
