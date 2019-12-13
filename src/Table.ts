@@ -26,7 +26,7 @@ class Table {
             return this._rows.filter(r => {
                 console.log(r.includes(s))
                 let flag = false;
-                for(let c of r) if (c.indexOf(s) != -1) flag = true;
+                for(let c of r) if (c.indexOf(s) == 0) flag = true;
                 return flag;
             });
 
