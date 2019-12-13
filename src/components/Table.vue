@@ -2,11 +2,11 @@
   <div class="wrap-table">
     <input type="text" v-model="SearchWord" placeholder="Начните вводить текст" />
     <div class="table">
-      <div class="table-columns">
+      <div class="table-columns" :style="`grid-template-columns: ${table.gridWidths}`">
         <div class="table-column" v-for="(c, index) in table.columns" :key="`c-${index}`">{{c}}</div>
       </div>
       <div class="table-rows">
-        <div class="table-row" v-for="(r, index) in table.rows" :key="`r-${index}`">
+        <div class="table-row" v-for="(r, index) in table.rows" :key="`r-${index}`" :style="`grid-template-columns: ${table.gridWidths}`">
           <div class="table-column" v-for="(c, index2) in r" :key="`r-${index}c-${index2}`">{{c}}</div>
         </div>
       </div>

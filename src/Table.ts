@@ -78,6 +78,10 @@ class Table {
     find(str: string) {
         this.search = str;
     }
+
+    get gridWidths()  {
+        return this._widths.map(e => `${e}fr`).join(' ')
+    }
 }
 
 export { Table }

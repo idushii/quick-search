@@ -26,4 +26,8 @@ export default class App extends Vue {
 
 <style lang="scss">
 @import "style.scss";
+
+.container {
+  margin-top: 2rem;
+}
 </style>
