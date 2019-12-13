@@ -84,15 +84,22 @@ class Table {
     get avgWidth() {
         let result: number[] = [];
 
-        for (let c in this._columns) {
-            //if (result[c]) result[c] += this._rows.reduce(r => )
+        for (let i = 0; i < this._columns.length; i++) {
+            let sum = 0;
+            
+            for(let j=0; j<this.rows.length; j++) {
+                sum += this.rows[j][i].length
+            }
+            
+            if (!result[i]) result[i] = 0
+            result[i] += sum;
         }
 
         return result;
     }
 
     get gridWidths() {
-        return this._widths.map(e => `${e}fr`).join(' ')
+        return this.avgWidth.map(e => `${e}fr`).join(' ')
     }
 }
 
