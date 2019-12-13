@@ -4,15 +4,9 @@ enum Delimiter {
     zpt = ',',
 }
 
-type Column = {
-    Title: string
-    Width: string
-}
-
 class Table {
     _rows: string[][] = []
     _columns: string[] = []
-    _widths: string[] = []
     search: string = ''
 
     constructor(columns?: string[], rows?: string[][]) {
@@ -24,7 +18,6 @@ class Table {
         let s = this.search
         if (this.search)
             return this._rows.filter(r => {
-                console.log(r.includes(s))
                 let flag = false;
                 for (let c of r) if (c.indexOf(s) == 0) flag = true;
                 return flag;
@@ -41,15 +34,9 @@ class Table {
         return this._columns;
     }
 
-    set columns(columns: any[]) {
+    set columns(columns: string[]) {
         for (let c of columns)
-            if (typeof (c) == "string") {
-                this._columns.push(c)
-                this._widths.push('1')
-            } else {
-                if ((c as Column).Title) this._columns.push((c as Column).Title)
-                if ((c as Column).Width) this._widths.push((c as Column).Width)
-            }
+            this._columns.push(c)
     }
 
     newLine(line: string[] = []) {
@@ -86,11 +73,11 @@ class Table {
 
         for (let i = 0; i < this._columns.length; i++) {
             let sum = 0;
-            
-            for(let j=0; j<this.rows.length; j++) {
+
+            for (let j = 0; j < this.rows.length; j++) {
                 sum += this.rows[j][i].length
             }
-            
+
             if (!result[i]) result[i] = 0
             result[i] += sum;
         }
