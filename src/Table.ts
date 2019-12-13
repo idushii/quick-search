@@ -13,6 +13,7 @@ class Table {
     _rows: string[][] = []
     _columns: string[] = []
     _widths: string[] = []
+    search: string = ''
 
     constructor(columns?: string[], rows?: string[][]) {
         if (rows) this._rows = rows;
@@ -20,6 +21,15 @@ class Table {
     }
 
     get rows() {
+        let s = this.search
+        if (this.search)
+            return this._rows.filter(r => {
+                console.log(r.includes(s))
+                let flag = false;
+                for(let c of r) if (c.indexOf(s) != -1) flag = true;
+                return flag;
+            });
+
         return this._rows;
     }
 
@@ -63,6 +73,10 @@ class Table {
             }
             this.newLine(cols);
         }
+    }
+
+    find(str: string) {
+        this.search = str;
     }
 }
 

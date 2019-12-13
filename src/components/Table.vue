@@ -38,7 +38,7 @@ export default class MyTable extends Vue {
 
   @Watch("SearchWord")
   f2() {
-    //this.table
+    this.table.find(this.SearchWord)
   }
 }
 </script>
