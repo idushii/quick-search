@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-table">
-    <input type="text" v-model="SearchWord" />
+    <input type="text" v-model="SearchWord" placeholder="Начните вводить текст" />
     <div class="table">
       <div class="table-columns">
         <div class="table-column" v-for="(c, index) in table.columns" :key="`c-${index}`">{{c}}</div>
@@ -20,16 +20,20 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Table } from "../Table";
 
 @Component
-export default class HelloWorld extends Vue {
+export default class MyTable extends Vue {
   @Prop() private payload!: string;
 
-  table: Table = new Table(["C1", "C2", "C3"]);
+  table: Table = new Table();
+
+  created() {
+    this.table.fromCSV(this.payload, {hasTitle: true});
+  }
 
   SearchWord = "";
 
   @Watch("payload")
   f1() {
-    this.table.fromCSV(this.payload);
+    this.table.fromCSV(this.payload, {hasTitle: true});
   }
 
   @Watch("SearchWord")
