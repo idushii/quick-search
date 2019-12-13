@@ -10,6 +10,9 @@
           <div class="table-column" v-for="(c, index2) in r" :key="`r-${index}c-${index2}`">{{c}}</div>
         </div>
       </div>
+      <div class="count">
+        Всего: {{table.rows.length}}
+      </div>
     </div>
   </div>
 </template>
