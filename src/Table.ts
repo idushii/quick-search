@@ -33,7 +33,7 @@ class Table {
     }
 
     get rows_reduce() {
-        const result = this.rows.slice(0, 100);
+        const result = this.rows.slice(0, 100000);
         console.log('end calc');
         return result;
     }
