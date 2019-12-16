@@ -36,6 +36,7 @@ export default class MyTable extends Vue {
 
   public SearchWord = '';
   @Prop() private payload!: string;
+  @Prop() private cols!: number[];
 
   public created() {
     this.table.fromCSV(this.payload, {
@@ -50,6 +51,7 @@ export default class MyTable extends Vue {
       delimiter: Delimiter.tck,
       hasTitle: false,
     });
+    this.table.cols =  this.cols
   }
 
   @Watch('SearchWord')

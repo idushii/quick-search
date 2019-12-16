@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <Table :payload="payload" />
+      <Table :payload="payload" :cols="[1, 1,3]" />
     </div>
   </div>
 </template>

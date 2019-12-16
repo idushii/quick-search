@@ -22,7 +22,7 @@ class Table {
         if (this.search) {
             result = this._rows.filter((r) => {
                 let flag = false;
-                for (const c of r) { if (c.indexOf(s) == 0) { flag = true; } }
+                for (const c of r) { if (c.toLocaleLowerCase().indexOf(s) == 0) { flag = true; } }
                 return flag;
             });
         }
@@ -78,11 +78,11 @@ class Table {
             this.newLine(cols);
         }
 
-        this.caclAvgWidth();
+        //this.caclAvgWidth();
     }
 
     public find(str: string) {
-        this.search = str;
+        this.search = str.toLocaleLowerCase();
     }
 
     public caclAvgWidth() {
@@ -104,6 +104,10 @@ class Table {
 
     get gridWidths() {
         return this.widths.map((e) => `${e}fr`).join(' ');
+    }
+
+    set cols(w: number[]) {
+        this.widths = w
     }
 }
 
