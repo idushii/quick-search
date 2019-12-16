@@ -33,7 +33,7 @@ class Table {
     }
 
     get rows_reduce() {
-        const result = this.rows.slice(0, 100);
+        const result = this.rows.slice(0, 100000);
         console.log('end calc');
         return result;
     }
@@ -127,9 +127,9 @@ class Table {
     copy() {
         let payload = ``
 
-        for (let i = 0; i < this._rows.length; i++)
+        for (let i = 0; i < this.rows.length; i++)
             if (this.select[i])
-                payload += this._rows[i].join('\t') + '\r\n'
+                payload += this.rows[i].join('\t') + '\r\n'
 
         const el = document.createElement('textarea');
         el.value = payload;
