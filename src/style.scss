@@ -2,6 +2,7 @@
 
 .wrap-table {
     @extend .card;
+    padding-bottom: 1rem;
 
     box-sizing: border-box;
 
@@ -9,6 +10,7 @@
         font-size: 1.2rem !important;
         padding: .5rem !important;
         box-sizing: border-box !important;
+
         &::placeholder {
             color: grey;
             padding-left: .5rem;
@@ -17,27 +19,50 @@
 
     .table {
         @extend .card-content;
-       .table-columns, .table-row {
-           display: grid;
-           grid-auto-flow: column;
-       }
 
-       .table-columns .table-column {
-           font-weight: bold;
-           font-size: 1.2rem;
-           text-align: center;
-       }
+        padding-bottom: 0;
 
-       .table-column {
-           border: 1px dashed rgb(199, 198, 198);
-           border-collapse: collapse;
-           padding: .5rem;
-           overflow: hidden;
-       }
+        .table-row {
+            &.active {
+                background-color: lighten(grey, 40%);
+            }
+        }
+
+        .table-columns,
+        .table-row {
+            display: grid;
+            grid-auto-flow: column;
+        }
+
+        .table-columns .table-column {
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .table-column {
+            border: 1px dashed rgb(199, 198, 198);
+            border-collapse: collapse;
+            padding: .5rem;
+            overflow: hidden;
+
+            label {
+                position: relative;
+                top: 5px;
+                left: 5px;
+            }
+
+        }
     }
 
-    .count {
-        text-align: right;
-        margin-top: 1rem;
+    .control {
+        @extend .card-content;
+        padding-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            @extend .btn;
+        }
     }
 }

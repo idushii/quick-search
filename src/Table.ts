@@ -9,6 +9,8 @@ class Table {
     public _columns: string[] = [];
     public search: string = '';
     public widths: number[] = [];
+    public select: boolean[] = [];
+    public _selectAll: boolean = false;
 
     constructor(columns?: string[], rows?: string[][]) {
         if (rows) { this.rows = rows; }
@@ -30,8 +32,8 @@ class Table {
         return result;
     }
 
-    get rows_reduce()  {
-        const result = this.rows.slice(0, 10000);
+    get rows_reduce() {
+        const result = this.rows.slice(0, 100);
         console.log('end calc');
         return result;
     }
@@ -56,6 +58,7 @@ class Table {
             // @ts-ignore
             line.id = this._rows.length;
             this._rows.push(line);
+            this.select.push(false);
         }
     }
 
@@ -99,16 +102,46 @@ class Table {
             result[i] += sum;
         }
         console.log('end calc width');
-        this.widths =  result;
+        this.widths = result;
     }
 
     get gridWidths() {
-        return this.widths.map((e) => `${e}fr`).join(' ');
+        return '3rem ' + this.widths.map((e) => `${e}fr`).join(' ');
     }
 
     set cols(w: number[]) {
         this.widths = w
     }
+
+    set selectAll(b: any) {
+        this._selectAll = !this._selectAll
+        if (b === true || b === false) this._selectAll = b
+        for (let i = 0; i < this.rows.length; i++)
+            this.select[i] = this._selectAll;
+    }
+
+    get selectAll() {
+        return this._selectAll
+    }
+
+    copy() {
+        let payload = ``
+
+        for (let i = 0; i < this._rows.length; i++)
+            if (this.select[i])
+                payload += this._rows[i].join('\t') + '\r\n'
+
+        const el = document.createElement('textarea');
+        el.value = payload;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+
+        this.selectAll = false
+
+    }
+
 }
 
 export { Table, Delimiter };
